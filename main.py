@@ -14,10 +14,6 @@ def install(choice):
 
     home = Path.home()
 
-
-
-
-
     if choice[0]:
         subprocess.run(
             ["cmd", "/c", "winget install --id 9PKL3H9LWMB7 --silent --accept-source-agreements --accept-package-agreements && exit"],
@@ -33,11 +29,12 @@ def install(choice):
     else:
         link = "https://cdn.fastly.steamstatic.com/client/installer/SteamSetup.exe"
         
-    subprocess.run(["powershell", "-Command", "mkdir $HOME/steam"], creationflags=subprocess.CREATE_NO_WINDOW)
-    steampath = home/"steam"
+
     if os.path.exists(steampath) and os.path.isdir(steampath):
         shutil.rmtree(steampath)
-
+    subprocess.run(["powershell", "-Command", "mkdir $HOME/steam"], creationflags=subprocess.CREATE_NO_WINDOW)
+    steampath = home/"steam"
+    
     with tempfile.TemporaryDirectory() as tempdir:
         local_filename = os.path.join(tempdir, "SteamSetup.exe")
     
