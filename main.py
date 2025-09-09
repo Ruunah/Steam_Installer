@@ -8,12 +8,15 @@ def install(choice):
     import os
     import requests
     import tempfile
+    import shutil
     import subprocess
     from pathlib import Path
 
     home = Path.home()
 
-    subprocess.run(["powershell", "-Command", "mkdir $HOME/steam"], creationflags=subprocess.CREATE_NO_WINDOW)
+
+
+
 
     if choice[0]:
         subprocess.run(
@@ -30,6 +33,10 @@ def install(choice):
     else:
         link = "https://cdn.fastly.steamstatic.com/client/installer/SteamSetup.exe"
         
+    subprocess.run(["powershell", "-Command", "mkdir $HOME/steam"], creationflags=subprocess.CREATE_NO_WINDOW)
+    steampath = home/"steam"
+    if os.path.exists(steampath) and os.path.isdir(steampath):
+        shutil.rmtree(steampath)
 
     with tempfile.TemporaryDirectory() as tempdir:
         local_filename = os.path.join(tempdir, "SteamSetup.exe")
