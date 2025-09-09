@@ -60,8 +60,15 @@ def install(choice):
     if choice[0]:
         starter = home/"steam"/f"{ending}.bat"
         starter.write_text(f"start {str(home)}\\steam\\{ending}.exe\nstart shell:appsFolder\\29645FreeConnectedLimited.X-VPN-FreeUnlimitedVPNPr_qjvpctbgym0d0!App")
-        create_shortcut(str(starter), f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
+        if os.path.exists(f"{str(home)}\\Desktop\\Steam.lnk") and os.path.isfile(f"{str(home)}\\Desktop\\Steam.lnk"):
+            os.remove(f"{str(home)}\\Desktop\\Steam.lnk")
+
+        create_shortcut(f"{str(home)}\\steam\\{ending}.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
+
     else:
+        if os.path.exists(f"{str(home)}\\Desktop\\Steam.lnk") and os.path.isfile(f"{str(home)}\\Desktop\\Steam.lnk"):
+            os.remove(f"{str(home)}\\Desktop\\Steam.lnk")
+
         create_shortcut(f"{str(home)}\\steam\\{ending}.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
 
 if __name__ == "__main__":
