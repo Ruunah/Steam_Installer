@@ -43,12 +43,12 @@ def install(choice):
         env["__COMPAT_LAYER"] = "RunAsInvoker"
         proc = subprocess.Popen(local_filename, env=env, shell=True)
         proc.wait()
-        if choice:
-            starter = home/"steam"/"steam.bat"
-            starter.write_text(f"start {str(home)}\\steam\\Steam.exe\nstart shell:appsFolder\\29645FreeConnectedLimited.X-VPN-FreeUnlimitedVPNPr_qjvpctbgym0d0!App")
-            create_shortcut(str(starter), f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\Steam.exe")
-        else:
-            create_shortcut(f"{str(home)}\\steam\\Steam.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\Steam.exe")
+    if choice:
+        starter = home/"steam"/"steam.bat"
+        starter.write_text(f"start {str(home)}\\steam\\Steam.exe\nstart shell:appsFolder\\29645FreeConnectedLimited.X-VPN-FreeUnlimitedVPNPr_qjvpctbgym0d0!App")
+        create_shortcut(str(starter), f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\Steam.exe")
+    else:
+        create_shortcut(f"{str(home)}\\steam\\Steam.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\Steam.exe")
 
 if __name__ == "__main__":
     main()
