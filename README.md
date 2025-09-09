@@ -1,5 +1,5 @@
 # Steam download without admin
-## Tradução [Portugues](https://gituhb.com/Ruunah/Steam_Installer/readmept.md)
+## Tradução [Portugues](readmept.md)
 ## Caviats of using my installer
   As you are not installing steam the proper way, when you start steam it will always show two errors, you will need to press ignore and cancel so it opens and some games will not work but otherwise you're fine
 ## Install Steps
