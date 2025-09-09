@@ -16,8 +16,8 @@ class RoundedWindow(QtWidgets.QWidget):
         layout.setContentsMargins(25, 25, 25, 25)
         layout.setSpacing(25)
 
-        self.checkbox = QtWidgets.QCheckBox("Install VPN")
-        self.checkbox.setStyleSheet("""
+        self.checkbox0 = QtWidgets.QCheckBox("Install VPN")
+        self.checkbox0.setStyleSheet("""
             QCheckBox {
                 color: #bdc1c6;
                 font-size: 16px;
@@ -33,7 +33,26 @@ class RoundedWindow(QtWidgets.QWidget):
                 background-color: #bdc1c6;
             }
         """)
-        layout.addWidget(self.checkbox, alignment=QtCore.Qt.AlignCenter)
+        layout.addWidget(self.checkbox0, alignment=QtCore.Qt.AlignCenter)
+
+        self.checkbox1 = QtWidgets.QCheckBox("Change Steam Name")
+        self.checkbox1.setStyleSheet("""
+            QCheckBox {
+                color: #bdc1c6;
+                font-size: 16px;
+            }
+            QCheckBox::indicator {
+                width: 10px;
+                height: 10px;
+                border-radius: 7px;
+                border: 2px solid #bdc1c6;
+                background: transparent;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #bdc1c6;
+            }
+        """)
+        layout.addWidget(self.checkbox1, alignment=QtCore.Qt.AlignCenter)
 
         self.button = QtWidgets.QPushButton("Continue")
         self.button.setFixedSize(100, 40)
@@ -52,7 +71,7 @@ class RoundedWindow(QtWidgets.QWidget):
         self.button.clicked.connect(self.on_continue)
 
     def on_continue(self):
-        self.choice = self.checkbox.isChecked()
+        self.choice = [self.checkbox0.isChecked(), self.checkbox1.isChecked()]
         self.close()
 
     def paintEvent(self, event):
@@ -83,4 +102,4 @@ def main():
     window = RoundedWindow()
     window.show()
     app.exec()
-    return window.checkbox.isChecked()
+    return window.choice

@@ -15,7 +15,7 @@ def install(choice):
 
     subprocess.run(["powershell", "-Command", "mkdir $HOME/steam"], creationflags=subprocess.CREATE_NO_WINDOW)
 
-    if choice:
+    if choice[0]:
         subprocess.run(
             ["cmd", "/c", "winget install --id 9PKL3H9LWMB7 --silent --accept-source-agreements --accept-package-agreements && exit"],
         )
@@ -43,12 +43,19 @@ def install(choice):
         env["__COMPAT_LAYER"] = "RunAsInvoker"
         proc = subprocess.Popen(local_filename, env=env, shell=True)
         proc.wait()
-    if choice:
-        starter = home/"steam"/"steam.bat"
-        starter.write_text(f"start {str(home)}\\steam\\Steam.exe\nstart shell:appsFolder\\29645FreeConnectedLimited.X-VPN-FreeUnlimitedVPNPr_qjvpctbgym0d0!App")
-        create_shortcut(str(starter), f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\Steam.exe")
+
+    if choice[1]:
+        os.rename(f"{str(home)}\\steam\\Steam.exe", f"{str(home)}\\steam\\Stim.exe")
+        ending = "Stim"
     else:
-        create_shortcut(f"{str(home)}\\steam\\Steam.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\Steam.exe")
+        ending = "Steam"
+
+    if choice[0]:
+        starter = home/"steam"/f"{ending}.bat"
+        starter.write_text(f"start {str(home)}\\steam\\{ending}.exe\nstart shell:appsFolder\\29645FreeConnectedLimited.X-VPN-FreeUnlimitedVPNPr_qjvpctbgym0d0!App")
+        create_shortcut(str(starter), f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
+    else:
+        create_shortcut(f"{str(home)}\\steam\\{ending}.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
 
 if __name__ == "__main__":
     main()
