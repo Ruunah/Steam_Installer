@@ -29,11 +29,10 @@ def install(choice):
     else:
         link = "https://cdn.fastly.steamstatic.com/client/installer/SteamSetup.exe"
         
-
+    steampath = home/"steam"
     if os.path.exists(steampath) and os.path.isdir(steampath):
         shutil.rmtree(steampath)
     subprocess.run(["powershell", "-Command", "mkdir $HOME/steam"], creationflags=subprocess.CREATE_NO_WINDOW)
-    steampath = home/"steam"
     
     with tempfile.TemporaryDirectory() as tempdir:
         local_filename = os.path.join(tempdir, "SteamSetup.exe")
@@ -60,7 +59,7 @@ def install(choice):
         if os.path.exists(f"{str(home)}\\Desktop\\Steam.lnk") and os.path.isfile(f"{str(home)}\\Desktop\\Steam.lnk"):
             os.remove(f"{str(home)}\\Desktop\\Steam.lnk")
 
-        create_shortcut(f"{str(home)}\\steam\\{ending}.exe", f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
+        create_shortcut(str(starter), f"{str(home)}\\Desktop\\Steam.lnk", f"{str(home)}\\steam\\{ending}.exe")
 
     else:
         if os.path.exists(f"{str(home)}\\Desktop\\Steam.lnk") and os.path.isfile(f"{str(home)}\\Desktop\\Steam.lnk"):
